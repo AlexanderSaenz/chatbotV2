@@ -1,0 +1,164 @@
+[
+  {
+    "id": "mmba",
+    "tipo": "maestría",
+    "programa": "Maestría en Gestión Minera (MMBA)",
+    "inicio": "04-abr-2025",
+    "duracion": "24 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Formación ejecutiva estratégica para liderar proyectos mineros de gran escala con visión internacional."
+  },
+  {
+    "id": "global-mba",
+    "tipo": "maestría",
+    "programa": "Maestría en Administración de Negocios – Global MBA STEM",
+    "inicio": "15-ago-2025",
+    "duracion": "24 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Conecta negocio, tecnología e innovación para liderar en la industria global con enfoque STEM."
+  },
+  {
+    "id": "costos-finanzas",
+    "tipo": "curso",
+    "programa": "Costos y Finanzas para Empresas Mineras",
+    "inicio": "31-ene-2025",
+    "duracion": "4 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Domina las métricas financieras clave para maximizar rentabilidad en proyectos mineros."
+  },
+  {
+    "id": "gestion-relaves",
+    "tipo": "curso",
+    "programa": "Gestión de Relaves en Minería",
+    "inicio": "14-mar-2025",
+    "duracion": "5 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Aprende las mejores prácticas ambientales y tecnológicas para una gestión segura de relaves."
+  },
+  {
+    "id": "ejecutivos-no-mineros",
+    "tipo": "curso",
+    "programa": "Minería para Ejecutivos no Mineros",
+    "inicio": "11-abr-2025",
+    "duracion": "2 meses",
+    "frecuencia": "Semanal",
+    "descripcion": "Ideal para ejecutivos que desean entender operaciones mineras sin experiencia técnica previa."
+  },
+  {
+    "id": "contratos-construccion",
+    "tipo": "curso",
+    "programa": "Gestión de Contratos en Proyectos de Construcción",
+    "inicio": "08-may-2025",
+    "duracion": "4 meses",
+    "frecuencia": "Semanal",
+    "descripcion": "Desarrolla habilidades para negociar y manejar contratos complejos en proyectos mineros."
+  },
+  {
+    "id": "valoracion-proyectos",
+    "tipo": "curso",
+    "programa": "Evaluación y Valoración de Proyectos Mineros",
+    "inicio": "23-may-2025",
+    "duracion": "5 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Aprende a valorar inversiones mineras con herramientas financieras y de toma de decisiones."
+  },
+  {
+    "id": "planes-cierre",
+    "tipo": "curso",
+    "programa": "Gestión Integral de Planes de Cierre",
+    "inicio": "06-jun-2025",
+    "duracion": "5 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Diseña planes integrales para cierre de minas con enfoque sostenible y regulatorio."
+  },
+  {
+    "id": "subterraneas",
+    "tipo": "programa",
+    "programa": "Programa de Especialización en Gestión Integrada de Operaciones Mineras Subterráneas",
+    "inicio": "18-jul-2025",
+    "duracion": "5 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Especialízate en operaciones subterráneas seguras y eficientes con enfoque práctico."
+  },
+  {
+    "id": "ia-quick",
+    "tipo": "curso",
+    "programa": "Quick Inteligencia Artificial - IA",
+    "inicio": "25-ago-2025",
+    "duracion": "4 semanas",
+    "frecuencia": "Semanal",
+    "descripcion": "Curso intensivo que introduce aplicaciones prácticas de IA en gestión minera."
+  },
+  {
+    "id": "diplomado-analitica",
+    "tipo": "diplomado",
+    "programa": "Diplomado en Gestión y Analítica de Datos para Minería",
+    "inicio": "29-ago-2025",
+    "duracion": "9 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Aprende a transformar datos en estrategias operativas que maximicen valor en minería."
+  },
+  {
+    "id": "derecho-minero",
+    "tipo": "curso",
+    "programa": "Derecho para la Actividad Minera",
+    "inicio": "05-sep-2025",
+    "duracion": "4 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Conoce el marco legal minero para asegurar cumplimiento y gestión eficiente."
+  },
+  {
+    "id": "perforacion-voladura",
+    "tipo": "programa",
+    "programa": "Programa Internacional Gestión y Productividad en Perforación y Voladura",
+    "inicio": "12-sep-2025",
+    "duracion": "3 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Optimiza seguridad y productividad en perforación y voladura minera con técnicas globales."
+  },
+  {
+    "id": "diplomado-estrategica",
+    "tipo": "diplomado",
+    "programa": "Diplomado Gestión Operativa y Estratégica Minera",
+    "inicio": "12-sep-2025",
+    "duracion": "7 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Desarrolla visión estratégica para liderar equipos y procesos en la industria minera."
+  },
+  {
+    "id": "geotecnica",
+    "tipo": "programa",
+    "programa": "Programa de Especialización Ingeniería Geotécnica para Minería",
+    "inicio": "10-oct-2025",
+    "duracion": "7 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Especialízate en estabilidad de taludes y seguridad geotécnica en operaciones mineras."
+  },
+  {
+    "id": "habilidades-directivas",
+    "tipo": "curso",
+    "programa": "Desarrollo de Habilidades Directivas",
+    "inicio": "17-oct-2025",
+    "duracion": "4.5 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Fortalece tu liderazgo, comunicación y gestión de equipos con enfoque ejecutivo."
+  },
+  {
+    "id": "optimizacion-costos",
+    "tipo": "curso",
+    "programa": "Optimización Estratégica de Costos para Empresas Mineras",
+    "inicio": "24-oct-2025",
+    "duracion": "4 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Reduce costos operativos sin comprometer la eficiencia ni seguridad operativa."
+  },
+  {
+    "id": "mineria-pequena",
+    "tipo": "curso",
+    "programa": "Gestión, Ingeniería y Tecnología para la Minería de Pequeña Escala",
+    "inicio": "07-nov-2025",
+    "duracion": "6 meses",
+    "frecuencia": "Quincenal",
+    "descripcion": "Diseñado para operadores pequeños que buscan técnicas eficientes y sostenibles."
+  }
+]

@@ -1,98 +1,105 @@
+// VARIABLES GLOBALES
 const toggleBtn = document.getElementById('chat-toggle');
 const chatContainer = document.getElementById('chatbot-container');
 const chatLog = document.getElementById('chat-log');
 let bienvenidaMostrada = false;
 let formularioActivo = false;
+let sessionId = "session-" + Math.random().toString(36).substr(2, 9);
+let todosLosProgramas = []; // se llena luego
 
-const programas = {
-  maestria: [
-    "• Maestría en Gestión Minera (Inicio: 04-abr-2025)",
-    "• MBA Global STEM (Inicio: 15-ago-2025)"
-  ],
-  diplomado: [
-    "• Diplomado en Gestión de Datos (Inicio: 29-ago-2025)"
-  ],
-  programa: [
-    "• Gestión de Operaciones Subterráneas (Inicio: 18-jul-2025)"
-  ],
-  curso: [
-    "• Costos y Finanzas Mineras (Inicio: 31-ene-2025)",
-    "• IA para Minería (Inicio: 25-ago-2025)"
-  ]
-};
-
-// Mostrar u ocultar el chatbot
+// BOTÓN FLOTANTE
 toggleBtn.addEventListener('click', () => {
-  if (chatContainer.style.display === 'flex') {
-    chatContainer.style.display = 'none';
-  } else {
-    chatContainer.style.display = 'flex';
-    if (!bienvenidaMostrada) {
-      mostrarBienvenida();
-      bienvenidaMostrada = true;
-    }
+  chatContainer.style.display = chatContainer.style.display === 'flex' ? 'none' : 'flex';
+  if (!bienvenidaMostrada) {
+    mostrarBienvenida();
+    bienvenidaMostrada = true;
   }
 });
 
+// BIENVENIDA
 function mostrarBienvenida() {
-  addMessage(`👋 ¡Hola! Bienvenido(a) a GERENS.\nSelecciona una opción para empezar:`, 'bot');
-  mostrarOpciones();
+  clearChat();
+  addMessage("👋 ¡Hola! Bienvenido(a) a GĚRENS. ¿En qué podemos ayudarte?", 'bot');
+  chatLog.appendChild(crearBoton("🎓 Ver cursos disponibles", mostrarProgramas));
+  chatLog.appendChild(crearBoton("📝 Dejar mis datos", () => mostrarFormulario()));
+  chatLog.appendChild(crearBoton("ℹ️ Información sobre GERENS", mostrarInfo));
+  scrollToBottom();
 }
 
-// Mostrar opciones del menú principal
-function mostrarOpciones() {
-  const opciones = [
-    { texto: "📘 Ver maestrías", tipo: "maestria" },
-    { texto: "📗 Ver diplomados", tipo: "diplomado" },
-    { texto: "📙 Ver programas de especialización", tipo: "programa" },
-    { texto: "📕 Ver cursos", tipo: "curso" },
-    { texto: "📝 Dejar mis datos", tipo: "formulario" }
-  ];
+function mostrarInfo() {
+  clearChat();
+  addMessage("Somos GERENS, líderes en formación ejecutiva especializada en gestión minera. Contamos con maestrías, diplomados y cursos diseñados para el sector.", 'bot');
+  chatLog.appendChild(crearBoton("🔙 Volver al inicio", mostrarBienvenida));
+  scrollToBottom();
+}
 
-  opciones.forEach(op => {
-    const btn = document.createElement('button');
-    btn.innerText = op.texto;
-    btn.className = 'option-btn';
-    btn.onclick = () => manejarOpcion(op.tipo);
-    chatLog.appendChild(btn);
+// VER PROGRAMAS POR TIPO
+function mostrarProgramas() {
+  clearChat();
+  addMessage("🎓 ¿Qué tipo de programa te interesa ver?", "bot");
+  ["maestría", "diplomado", "programa", "curso"].forEach(tipo => {
+    chatLog.appendChild(crearBoton(capitalize(tipo) + "s", () => mostrarListaPorTipo(tipo)));
   });
-
-  chatLog.scrollTop = chatLog.scrollHeight;
+  chatLog.appendChild(crearBoton("🔙 Volver al inicio", mostrarBienvenida));
+  scrollToBottom();
 }
 
-function manejarOpcion(tipo) {
-  if (tipo === "formulario") {
-    mostrarFormulario();
+function mostrarListaPorTipo(tipo) {
+  clearChat();
+  const programasFiltrados = todosLosProgramas
+    .filter(p => p.tipo === tipo)
+    .sort((a, b) => new Date(fechaParseada(a.inicio)) - new Date(fechaParseada(b.inicio)));
+
+  if (programasFiltrados.length === 0) {
+    addMessage(`⚠️ No hay ${tipo}s disponibles en este momento.`, 'bot');
+    chatLog.appendChild(crearBoton("🔙 Volver", mostrarProgramas));
     return;
   }
 
-  const items = programas[tipo] || [];
-  if (items.length === 0) {
-    addMessage(`⚠️ No hay ${tipo}s disponibles en este momento.`, 'bot');
-  } else {
-    addMessage(`📋 Estos son nuestros ${tipo}s disponibles:\n${items.join("\n")}`, 'bot');
+  addMessage(`📚 ${capitalize(tipo)}s disponibles:`, "bot");
+  programasFiltrados.forEach(p => {
+    const msg = document.createElement("div");
+    msg.className = "msg bot-msg";
+    msg.innerText = `• ${p.programa} (Inicio: ${p.inicio})`;
+    const btn = crearBoton("🔎 Ver detalles", () => mostrarDetalle(p.id));
+    chatLog.appendChild(msg);
+    chatLog.appendChild(btn);
+  });
+
+  chatLog.appendChild(crearBoton("🔙 Volver", mostrarProgramas));
+  scrollToBottom();
+}
+
+function mostrarDetalle(id) {
+  const p = todosLosProgramas.find(x => x.id === id);
+  if (!p) return;
+
+  clearChat();
+  addMessage(`📌 ${p.programa}\n\n🕒 Inicio: ${p.inicio}\n📅 Duración: ${p.duracion}\n🎯 ${p.descripcion || "Descripción no disponible."}`, "bot");
+
+  const sugerencia = document.createElement('div');
+  sugerencia.className = 'msg bot-msg';
+  sugerencia.innerText = "¿Te interesa este curso? Puedes dejar tus datos y te contactamos.";
+  chatLog.appendChild(sugerencia);
+
+  chatLog.appendChild(crearBoton("📝 Dejar mis datos", () => mostrarFormulario(p.programa)));
+  chatLog.appendChild(crearBoton("🔙 Volver al inicio", mostrarBienvenida));
+  scrollToBottom();
+}
+
+// FORMULARIO DE CONTACTO
+function mostrarFormulario(programaPreseleccionado = "") {
+  if (programaPreseleccionado instanceof PointerEvent || typeof programaPreseleccionado !== 'string') {
+    programaPreseleccionado = "";
   }
 
-  // Volver a mostrar menú después
-  setTimeout(() => {
-    addMessage(`¿Deseas ver otra opción?`, 'bot');
-    mostrarOpciones();
-  }, 1000);
-}
+  clearChat();
+  addMessage("📝 Por favor completa tus datos:", "bot");
 
-// Agregar mensaje al chat
-function addMessage(text, sender) {
-  const msg = document.createElement('div');
-  msg.className = `msg ${sender}-msg`;
-  msg.innerText = text;
-  chatLog.appendChild(msg);
-  chatLog.scrollTop = chatLog.scrollHeight;
-}
-
-// Mostrar formulario
-function mostrarFormulario() {
-  if (formularioActivo) return;
-  formularioActivo = true;
+  const opcionesPrograma = todosLosProgramas
+    .map(p => `<option value="${p.programa}" ${p.programa === programaPreseleccionado ? "selected" : ""}>${p.programa}</option>`)
+    .sort()
+    .join("") + `<option value="No estoy seguro">No estoy seguro</option>`;
 
   const formDiv = document.createElement('div');
   formDiv.className = "inline-form";
@@ -100,21 +107,24 @@ function mostrarFormulario() {
     <input type="text" id="nombre" placeholder="Nombre completo" required />
     <input type="text" id="telefono" placeholder="Teléfono" required />
     <input type="email" id="correo" placeholder="Correo electrónico" />
-    <input type="text" id="programa" placeholder="Programa de interés" />
-    <button class="form-btn" id="enviarForm">Enviar</button>
+    <label for="programa">Programa de interés:</label>
+    <select id="programa">${opcionesPrograma}</select>
+    <div class="form-buttons">
+      <button class="form-btn" id="enviarForm">Enviar</button>
+      <button class="form-btn back" onclick="mostrarBienvenida()">Volver</button>
+    </div>
   `;
   chatLog.appendChild(formDiv);
-  chatLog.scrollTop = chatLog.scrollHeight;
+  scrollToBottom();
 
   document.getElementById('enviarForm').onclick = enviarFormulario;
 }
 
-// Enviar formulario al webhook
 async function enviarFormulario() {
   const nombre = document.getElementById('nombre').value.trim();
   const telefono = document.getElementById('telefono').value.trim();
   const correo = document.getElementById('correo').value.trim();
-  const programa = document.getElementById('programa').value.trim();
+  const programa = document.getElementById('programa')?.value || "";
 
   if (!nombre || !telefono) {
     alert("Nombre y teléfono son obligatorios");
@@ -142,6 +152,50 @@ async function enviarFormulario() {
   } catch (error) {
     addMessage("❌ Error al enviar los datos. Intenta más tarde.", "bot");
   }
+}
 
+// FUNCIONES AUXILIARES
+function addMessage(text, sender) {
+  const msg = document.createElement('div');
+  msg.className = `msg ${sender}-msg`;
+  msg.innerText = text;
+  chatLog.appendChild(msg);
+  scrollToBottom();
+}
+
+function crearBoton(texto, handler) {
+  const btn = document.createElement('button');
+  btn.className = 'option-btn';
+  btn.innerText = texto;
+  btn.onclick = handler;
+  return btn;
+}
+
+function scrollToBottom() {
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+function clearChat() {
+  chatLog.innerHTML = '';
   formularioActivo = false;
 }
+
+function capitalize(texto) {
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+function fechaParseada(texto) {
+  const meses = {
+    'ene': '01', 'feb': '02', 'mar': '03', 'abr': '04', 'may': '05', 'jun': '06',
+    'jul': '07', 'ago': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dic': '12'
+  };
+  const partes = texto.toLowerCase().split('-');
+  return `${partes[2]}-${meses[partes[1]]}-${partes[0]}`;
+}
+
+// CARGAR PROGRAMAS
+fetch("programas.json")
+  .then(res => res.json())
+  .then(data => {
+    todosLosProgramas = data.map((p, i) => ({ ...p, id: i }));
+  });
