@@ -194,8 +194,16 @@ function fechaParseada(texto) {
 }
 
 // CARGAR PROGRAMAS
-fetch("programas.json")
+/*fetch("programas.json")
   .then(res => res.json())
   .then(data => {
     todosLosProgramas = data.map((p, i) => ({ ...p, id: i }));
+  });*/
+
+  // CARGAR JSON EXTERNO DESDE GOOGLE DRIVE
+fetch("https://raw.githubusercontent.com/AlexanderSaenz/chatbotV2/master/programas.json")
+  .then(res => res.json())
+  .then(data => {
+    todosLosProgramas = data;
   });
+
