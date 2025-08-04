@@ -1,0 +1,178 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Botón flotante */
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+#chat-toggle:hover {
+  transform: scale(1.1);
+}
+
+#chat-toggle img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* Contenedor del chatbot */
+#chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  max-height: 500px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  animation: slideUp 0.3s ease-out;
+  z-index: 999;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+#chat-header {
+  background: #007bff;
+  color: white;
+  padding: 12px 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#chat-log {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f5f5f5;
+}
+
+.msg {
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease-in;
+  font-size: 14px;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: #007bff;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.bot-msg {
+  align-self: flex-start;
+  background: #e9ecef;
+  border-bottom-left-radius: 0;
+}
+
+/* Estilo para los botones de opciones del menú */
+.option-btn {
+  background: #0069d9;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 4px;
+  font-size: 14px;
+  text-align: left;
+  width: fit-content;
+  max-width: 90%;
+  align-self: flex-start;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.option-btn:hover {
+  background: #0056b3;
+}
+
+#chat-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+#userInput {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+#sendBtn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#sendBtn:hover {
+  background: #0056b3;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botón para mostrar formulario */
+.form-btn {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.form-btn:hover {
+  background: #218838;
+}
+
+/* Estilo del formulario inline */
+.inline-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.inline-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
