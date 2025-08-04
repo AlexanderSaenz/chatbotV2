@@ -160,21 +160,5 @@
     "duracion": "6 meses",
     "frecuencia": "Quincenal",
     "descripcion": "Diseñado para operadores pequeños que buscan técnicas eficientes y sostenibles."
-  },
-  {
-    "tipo": "maestría",
-    "programa": "Prueba0000",
-    "inicio": "2025-08-04",
-    "duracion": "6 meses",
-    "frecuencia": "Quincenal",
-    "descripcion": "pruebaaa"
-  },
-  {
-    "tipo": "maestría",
-    "programa": "Prueba",
-    "inicio": "2025-08-04",
-    "duracion": "6 meses",
-    "frecuencia": "Semanal",
-    "descripcion": ""
   }
 ]
